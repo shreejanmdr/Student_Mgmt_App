@@ -6,7 +6,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:student_management_starter/features/batch/domain/entity/batch_entity.dart';
-import 'package:student_management_starter/features/batch/presentation/viewmodel/batch_viewmodel.dart';
+import 'package:student_management_starter/features/batch/presentation/viewmodel/batch_view_model.dart';
+
 import 'package:student_management_starter/features/course/domain/entity/course_entity.dart';
 import 'package:student_management_starter/features/course/presentation/viewmodel/course_viewmodel.dart';
 

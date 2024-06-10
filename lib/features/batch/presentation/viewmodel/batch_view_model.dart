@@ -13,11 +13,10 @@ final batchViewmodelProvider =
 );
 
 class BatchViewmodel extends StateNotifier<BatchState> {
+  final BatchUseCase batchUseCase;
   BatchViewmodel(this.batchUseCase) : super(BatchState.initial()) {
     getAllBatches();
   }
-
-  final BatchUseCase batchUseCase;
 
   addBatch(BatchEntity batch) async {
     // To show the progress bar
@@ -36,6 +35,25 @@ class BatchViewmodel extends StateNotifier<BatchState> {
     );
 
     getAllBatches();
+  }
+
+  deleteBatch(BatchEntity batch) async {
+    state.copyWith(isLoading: true);
+    var data = await batchUseCase.deleteBatch(batch.batchId!);
+
+    data.fold(
+      (l) {
+        state = state.copyWith(isLoading: false, error: l.error);
+        showMySnackBar(message: l.error, color: Colors.red);
+      },
+      (r) {
+        state.lstBatches.remove(batch);
+        state = state.copyWith(isLoading: false, error: null);
+        showMySnackBar(
+          message: 'Batch delete successfully',
+        );
+      },
+    );
   }
 
   // For getting all batches

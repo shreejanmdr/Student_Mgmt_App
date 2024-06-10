@@ -39,6 +39,17 @@ class BatchHiveModel {
       );
 
   // Convert Hive List to Entity List
-  List<BatchEntity> toEntityList(List<BatchHiveModel> models) =>
-      models.map((model) => model.toEntity()).toList();
+  List<BatchEntity> toEntityList(List<BatchHiveModel> hiveModels) {
+    return hiveModels.map((hiveModel) => hiveModel.toEntity()).toList();
+  }
+
+  // to hive model
+  List<BatchHiveModel> fromEntityList(List<BatchEntity> entities) {
+    return entities.map((entity) => fromEntity(entity)).toList();
+  }
+
+  @override
+  String toString() {
+    return 'batchId: $batchId, batchName: $batchName';
+  }
 }

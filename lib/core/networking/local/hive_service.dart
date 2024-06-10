@@ -31,7 +31,7 @@ class HiveService {
 
   Future<void> deleteBatch(String id) async {
     var box = await Hive.openBox<BatchHiveModel>(HiveTableConstant.batchBox);
-    return await box.delete(id);
+    await box.delete(id);
   }
 
   // ======================== Course Queries ========================

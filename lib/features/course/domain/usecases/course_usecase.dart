@@ -28,7 +28,5 @@ class CourseUseCase {
     return courseRepository.deleteCourse(id);
   }
 
-  Future<Either<Failure, List<BatchEntity>>> getAllBatches() async {
-    return const Right([]);
-  }
+  
 }

@@ -11,4 +11,5 @@ final batchRepositoryProvider = Provider<IBatchRepository>((ref) {
 abstract class IBatchRepository {
   Future<Either<Failure, bool>> addBatch(BatchEntity batch);
   Future<Either<Failure, List<BatchEntity>>> getAllBatches();
+  Future<Either<Failure, bool>> deleteBatch(String id);
 }

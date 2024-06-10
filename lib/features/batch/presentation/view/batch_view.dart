@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:student_management_starter/features/batch/domain/entity/batch_entity.dart';
-import 'package:student_management_starter/features/batch/presentation/viewmodel/batch_viewmodel.dart';
+import 'package:student_management_starter/features/batch/presentation/viewmodel/batch_view_model.dart';
 
 class BatchView extends ConsumerStatefulWidget {
   const BatchView({super.key});
@@ -94,6 +94,9 @@ class _AddBatchViewState extends ConsumerState<BatchView> {
                           icon: const Icon(Icons.delete),
                           onPressed: () {
                             // Delete the batch
+                            ref
+                                .read(batchViewmodelProvider.notifier)
+                                .deleteBatch(batch);
                           },
                         ),
                       );

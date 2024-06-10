@@ -49,4 +49,15 @@ class BatchLocalDatSource {
       return Left(Failure(error: e.toString()));
     }
   }
+
+   // Delete Course
+  Future<Either<Failure, bool>> deleteBatch(String id) async {
+    try {
+      // Delete from Hive
+      await hiveService.deleteBatch(id);
+      return const Right(true);
+    } catch (e) {
+      return Left(Failure(error: e.toString()));
+    }
+  }
 }

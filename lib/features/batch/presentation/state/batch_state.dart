@@ -4,7 +4,6 @@ class BatchState {
   final List<BatchEntity> lstBatches;
   final bool isLoading;
   final String? error;
- 
 
   BatchState({
     required this.lstBatches,
@@ -16,7 +15,6 @@ class BatchState {
     return BatchState(
       lstBatches: [],
       isLoading: false,
-      error: null,
     );
   }
 

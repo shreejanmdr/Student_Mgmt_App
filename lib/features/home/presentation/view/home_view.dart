@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:student_management_starter/features/batch/presentation/view/batch_view.dart';
 import 'package:student_management_starter/features/course/presentation/view/course_view.dart';
-import 'package:student_management_starter/features/home/presentation/view/bottom_view/dashboard_view.dart';
-import 'package:student_management_starter/features/home/presentation/view/bottom_view/profile_view.dart';
+import 'package:student_management_starter/features/home/presentation/view/bottom_view.dart/dashboard_view.dart';
+import 'package:student_management_starter/features/home/presentation/view/bottom_view.dart/profile_view.dart';
+
 
 class HomeView extends ConsumerStatefulWidget {
   const HomeView({super.key});

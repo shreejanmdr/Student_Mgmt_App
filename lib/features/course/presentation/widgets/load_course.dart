@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:student_management_starter/features/course/domain/entity/course_entity.dart';
-import 'package:student_management_starter/features/course/presentation/viewmodel/course_viewmodel.dart';
+import 'package:student_management_starter/features/course/presentation/viewmodel/course_view_model.dart';
 
 class LoadCourse extends StatelessWidget {
   final WidgetRef ref;

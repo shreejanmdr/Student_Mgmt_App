@@ -6,12 +6,9 @@ import 'package:student_management_starter/core/networking/local/hive_service.da
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await HiveService().init();
-
   runApp(
     const ProviderScope(
       child: App(),
     ),
   );
 }
-
-

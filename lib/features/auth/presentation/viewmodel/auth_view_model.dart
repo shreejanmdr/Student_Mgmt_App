@@ -50,4 +50,8 @@ class AuthViewModel extends StateNotifier<AuthState> {
   void openRegisterView() {
     navigator.openRegisterView();
   }
+
+  void openLoginView() {
+    // navigator.openLoginView();
+  }
 }

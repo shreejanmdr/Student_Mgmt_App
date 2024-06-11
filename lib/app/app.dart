@@ -13,7 +13,7 @@ class App extends ConsumerWidget {
       navigatorKey: AppNavigator.navigatorKey,
       debugShowCheckedModeBanner: false,
       title: 'Student Management',
-      theme: AppTheme.getApplicationTheme(false),
+      theme: AppTheme.getApplicationTheme(true),
       home: const SplashView(),
     );
   }

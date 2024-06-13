@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:student_management_starter/features/course/domain/entity/course_entity.dart';
 import 'package:student_management_starter/features/course/presentation/viewmodel/course_view_model.dart';
+import 'package:student_management_starter/features/course/presentation/widgets/load_course.dart';
 
 class CourseView extends ConsumerStatefulWidget {
   const CourseView({super.key});
@@ -18,21 +19,14 @@ class _CourseViewState extends ConsumerState<CourseView> {
   Widget build(BuildContext context) {
     var courseState = ref.watch(courseViewModelProvider);
     return Scaffold(
-      body: SizedBox.expand(
+      appBar: AppBar(
+        title: const Text('Course Management'),
+      ),
+      body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(10.0),
           child: Column(
             children: [
-              const SizedBox(
-                height: 60,
-              ),
-              const Text(
-                'Add Course',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
               TextFormField(
                 controller: courseController,
                 decoration: const InputDecoration(
@@ -47,6 +41,7 @@ class _CourseViewState extends ConsumerState<CourseView> {
                     ref.read(courseViewModelProvider.notifier).addCourse(
                           CourseEntity(courseName: courseController.text),
                         );
+                    courseController.clear();
                   },
                   child: const Text('Add Course'),
                 ),
@@ -55,7 +50,7 @@ class _CourseViewState extends ConsumerState<CourseView> {
               const Text(
                 'List of Courses',
                 style: TextStyle(
-                  fontSize: 20,
+                  fontSize: 16,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -64,25 +59,9 @@ class _CourseViewState extends ConsumerState<CourseView> {
                   : courseState.lstCourses.isEmpty
                       ? const Text('No Courses')
                       : Expanded(
-                          child: ListView.builder(
-                            itemCount: courseState.lstCourses.length,
-                            itemBuilder: (context, index) {
-                              return ListTile(
-                                title: Text(
-                                    courseState.lstCourses[index].courseName),
-                                subtitle: Text(
-                                    courseState.lstCourses[index].courseId!),
-                                trailing: IconButton(
-                                  icon: const Icon(Icons.delete),
-                                  onPressed: () {
-                                    ref
-                                        .read(courseViewModelProvider.notifier)
-                                        .deleteCourse(
-                                            courseState.lstCourses[index]);
-                                  },
-                                ),
-                              );
-                            },
+                          child: LoadCourse(
+                            lstCourse: courseState.lstCourses,
+                            ref: ref,
                           ),
                         ),
             ],

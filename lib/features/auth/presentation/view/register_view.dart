@@ -306,17 +306,6 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                       child: const Text('Register'),
                     ),
                   ),
-                  // SizedBox(
-                  //   width: double.infinity,
-                  //   child: ElevatedButton(
-                  //     onPressed: () {
-                  //       ref
-                  //           .read(authViewModelProvider.notifier)
-                  //           .openLoginView();
-                  //     },
-                  //     child: const Text('Back to Login'),
-                  //   ),
-                  // ),
                 ],
               ),
             ),

@@ -7,6 +7,5 @@ class CourseEntity extends Equatable {
   const CourseEntity({this.courseId, required this.courseName});
 
   @override
-  
   List<Object?> get props => [courseId, courseName];
 }

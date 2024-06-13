@@ -27,7 +27,7 @@ class BatchLocalDataSource {
   Future<Either<Failure, bool>> addBatch(BatchEntity batch) async {
     try {
       // Convert Entity to Hive Object
-      final hiveBatch = batchHiveModel.fromEntity(batch);
+      final hiveBatch = batchHiveModel.toHiveModel(batch);
 
       // Convert Hive List to Entry list
       // Add to Hive
@@ -56,7 +56,7 @@ class BatchLocalDataSource {
   Future<Either<Failure, bool>> deleteBatch(BatchEntity batch) async {
     try {
       // Delete batches from Hive
-      final hiveBatch = batchHiveModel.fromEntity(batch);
+      final hiveBatch = batchHiveModel.toHiveModel(batch);
 
       await hiveService.deleteBatch(hiveBatch);
       return const Right(true);

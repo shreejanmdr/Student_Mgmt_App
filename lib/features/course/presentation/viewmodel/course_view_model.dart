@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:student_management_starter/core/common/my_snackbar.dart';
 import 'package:student_management_starter/features/course/domain/entity/course_entity.dart';
 import 'package:student_management_starter/features/course/domain/usecases/course_usecase.dart';
 import 'package:student_management_starter/features/course/presentation/state/course_state.dart';
+import 'package:student_management_starter/features/course/presentation/widgets/show_my_snackbar.dart';
 
 final courseViewModelProvider =
     StateNotifierProvider<CourseViewModel, CourseState>(

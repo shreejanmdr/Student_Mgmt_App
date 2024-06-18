@@ -19,10 +19,7 @@ class AuthLocalDataSource {
   Future<Either<Failure, bool>> addStudent(AuthEntity auth) async {
     try {
       // If already username throw error
-      // final student = await hiveService.getStudent(auth.username);
-      // if (student != null) {
-      //   throw Exception('Username already exists');
-      // }
+
       final hiveStudent = authHiveModel.toHiveModel(auth);
 
       await hiveService.addStudent(hiveStudent);
@@ -49,11 +46,7 @@ class AuthLocalDataSource {
   // Login
   Future<Either<Failure, bool>> login(String username, String password) async {
     try {
-      final student = await hiveService.login(username, password);
-
-      if (student == null) {
-        return const Right(false);
-      }
+      await hiveService.login(username, password);
 
       return const Right(true);
     } catch (e) {

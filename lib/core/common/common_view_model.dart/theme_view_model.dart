@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final themeViewModelNotifier =
+final themeViewModelProvider =
     StateNotifierProvider<ThemeViewModel, bool>((ref) => ThemeViewModel());
 
 class ThemeViewModel extends StateNotifier<bool> {

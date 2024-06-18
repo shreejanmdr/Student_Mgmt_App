@@ -29,11 +29,12 @@ class BatchWidget extends StatelessWidget {
             //     .getStudentsByBatch(context, batchList[index].batchId!);
           },
           child: Card(
-            color: Colors.orange,
+            color: Colors.green[100],
             child: Center(
               child: Text(
                 batchList[index].batchName,
                 style: const TextStyle(
+                  color: Colors.black,
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
                 ),

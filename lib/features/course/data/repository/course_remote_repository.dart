@@ -5,15 +5,15 @@ import 'package:student_management_starter/features/course/data/data_source/remo
 import 'package:student_management_starter/features/course/domain/entity/course_entity.dart';
 import 'package:student_management_starter/features/course/domain/repository/i_course_repository.dart';
 
-final courseRemoteRepoProvider = Provider<ICourseRepository>((ref) {
-  return CourseRemoteRepositoryImpl(
+final courseRemoteRepository = Provider<ICourseRepository>((ref) {
+  return CourseRemoteRepository(
       courseRemoteDataSource: ref.read(courseRemoteDataSourceProvider));
 });
 
-class CourseRemoteRepositoryImpl implements ICourseRepository {
+class CourseRemoteRepository implements ICourseRepository {
   final CourseRemoteDataSource courseRemoteDataSource;
 
-  CourseRemoteRepositoryImpl({required this.courseRemoteDataSource});
+  CourseRemoteRepository({required this.courseRemoteDataSource});
   @override
   Future<Either<Failure, bool>> addCourse(CourseEntity course) {
     return courseRemoteDataSource.addCourse(course);
@@ -21,7 +21,7 @@ class CourseRemoteRepositoryImpl implements ICourseRepository {
 
   @override
   Future<Either<Failure, bool>> deleteCourse(CourseEntity course) {
-    return courseRemoteDataSource.deleteCourse(course);
+    return courseRemoteDataSource.deleteCourse(course.courseId!);
   }
 
   @override

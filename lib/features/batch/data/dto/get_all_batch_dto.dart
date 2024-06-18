@@ -3,6 +3,7 @@ import 'package:student_management_starter/features/batch/data/model/batch_api_m
 
 part 'get_all_batch_dto.g.dart';
 
+// dart run build_runner build -d
 @JsonSerializable()
 class GetAllBatchDTO {
   final bool success;

@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/src/consumer.dart';
 import 'package:student_management_starter/features/course/domain/entity/course_entity.dart';
 
 class CourseWidget extends StatelessWidget {
   final List<CourseEntity> courseList;
-  const CourseWidget(
-      {super.key, required this.courseList, required WidgetRef ref});
+  const CourseWidget({super.key, required this.courseList});
 
   @override
   Widget build(BuildContext context) {
@@ -19,11 +17,12 @@ class CourseWidget extends StatelessWidget {
       ),
       itemBuilder: (context, index) {
         return Card(
-          color: Colors.blue,
+          color: Colors.yellow[100],
           child: Center(
             child: Text(
               courseList[index].courseName,
               style: const TextStyle(
+                color: Colors.black,
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
               ),

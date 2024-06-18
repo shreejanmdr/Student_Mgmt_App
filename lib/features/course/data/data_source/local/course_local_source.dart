@@ -24,7 +24,7 @@ class CourseLocalSource {
   Future<Either<Failure, bool>> addCourse(CourseEntity course) async {
     try {
       // Convert Entity to Hive Object
-      final hiveCourse = courseHiveModel.toHiveModel(course);
+      final hiveCourse = courseHiveModel.fromEntity(course);
 
       // Add to Hive
       await hiveService.addCourse(hiveCourse);
@@ -53,7 +53,7 @@ class CourseLocalSource {
   Future<Either<Failure, bool>> deleteCourse(CourseEntity course) async {
     try {
       // Convert Entity to Hive Object
-      final hiveCourse = courseHiveModel.toHiveModel(course);
+      final hiveCourse = courseHiveModel.fromEntity(course);
 
       // Add to Hive
       await hiveService.deleteCourse(hiveCourse);

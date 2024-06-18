@@ -30,13 +30,13 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
   }
 
   File? _img;
+
   Future _browseImage(WidgetRef ref, ImageSource imageSource) async {
     try {
       final image = await ImagePicker().pickImage(source: imageSource);
       if (image != null) {
-        setState(() {
-          _img = File(image.path);
-        });
+        _img = File(image.path);
+        ref.read(authViewModelProvider.notifier).uploadImage(_img!).toString();
       } else {
         return;
       }
@@ -98,7 +98,6 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                                   checkCameraPermission();
                                   _browseImage(ref, ImageSource.camera);
                                   Navigator.pop(context);
-                                  // Upload image it is not null
                                 },
                                 icon: const Icon(Icons.camera),
                                 label: const Text('Camera'),
@@ -259,20 +258,11 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                   _gap,
                   TextFormField(
                     controller: _passwordController,
-                    obscureText: authState.obscurePassword,
                     decoration: InputDecoration(
                       labelText: 'Password',
                       suffixIcon: IconButton(
-                        icon: Icon(
-                          authState.obscurePassword
-                              ? Icons.visibility
-                              : Icons.visibility_off,
-                        ),
-                        onPressed: () {
-                          ref
-                              .read(authViewModelProvider.notifier)
-                              .obsurePassword();
-                        },
+                        icon: const Icon(Icons.visibility),
+                        onPressed: () {},
                       ),
                     ),
                     validator: ((value) {
@@ -290,14 +280,14 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                         if (_key.currentState!.validate()) {
                           // Register
                           AuthEntity auth = AuthEntity(
-                            fname: _fnameController.text,
-                            lname: _lnameController.text,
-                            phone: _phoneController.text,
-                            batch: _dropDownValue!,
-                            courses: _lstCourseSelected,
-                            username: _usernameController.text,
-                            password: _passwordController.text,
-                          );
+                              fname: _fnameController.text,
+                              lname: _lnameController.text,
+                              phone: _phoneController.text,
+                              batch: _dropDownValue!,
+                              courses: _lstCourseSelected,
+                              username: _usernameController.text,
+                              password: _passwordController.text,
+                              image: authState.imageName ?? '');
                           ref
                               .read(authViewModelProvider.notifier)
                               .addStudent(auth: auth);
@@ -306,6 +296,9 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                       child: const Text('Register'),
                     ),
                   ),
+                  authState.isLoading
+                      ? const CircularProgressIndicator()
+                      : const SizedBox()
                 ],
               ),
             ),

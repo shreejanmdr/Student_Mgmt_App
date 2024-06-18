@@ -1,30 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:student_management_starter/core/common/common_view_model.dart/theme_view_model.dart';
 import 'package:student_management_starter/features/batch/presentation/view/batch_view.dart';
 import 'package:student_management_starter/features/course/presentation/view/course_view.dart';
-import 'package:student_management_starter/features/home/presentation/view/bottom_view.dart/dashboard_view.dart';
-import 'package:student_management_starter/features/home/presentation/view/bottom_view.dart/profile_view.dart';
+import 'package:student_management_starter/features/home/presentation/view/dashboard_view.dart';
+import 'package:student_management_starter/features/home/presentation/viewmodel/home_view_model.dart';
 
-
-class HomeView extends ConsumerStatefulWidget {
+class HomeView extends ConsumerWidget {
   const HomeView({super.key});
 
   @override
-  ConsumerState<HomeView> createState() => _HomeViewState();
-}
-
-class _HomeViewState extends ConsumerState<HomeView> {
-  int selectedIndex = 0;
-  List<Widget> lstScreen = [
-    const DashboardView(),
-    const CourseView(),
-    const BatchView(),
-    const ProfileView(),
-  ];
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final homeState = ref.watch(homeViewModelProvider);
+   
+    final lstViews = [
+      const DashboardView(),
+      const CourseView(),
+      const BatchView(),
+      const SizedBox.expand(
+        child: Center(
+          child: Text(
+            'Profile ',
+          ),
+        ),
+      )
+    ];
     return Scaffold(
-      body: lstScreen[selectedIndex],
+      
+      body: lstViews[homeState],
       bottomNavigationBar: BottomNavigationBar(
         items: const [
           BottomNavigationBarItem(
@@ -44,11 +47,9 @@ class _HomeViewState extends ConsumerState<HomeView> {
             label: 'Profile',
           ),
         ],
-        currentIndex: selectedIndex,
+        currentIndex: homeState,
         onTap: (index) {
-          setState(() {
-            selectedIndex = index;
-          });
+          ref.read(homeViewModelProvider.notifier).changeIndex(index);
         },
       ),
     );

@@ -1,22 +1,22 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:student_management_starter/features/course/data/model/course_api_model.dart';
 
-part 'get_all_course_dto.g.dart';
+part 'get_all_courses_dto.g.dart';
 
 @JsonSerializable()
-class GetAllCourseDTO {
+class GetAllCoursesDTO {
   final bool success;
   final int count;
   final List<CourseApiModel> data;
 
-  GetAllCourseDTO({
+  GetAllCoursesDTO({
     required this.success,
     required this.count,
     required this.data,
   });
 
-  factory GetAllCourseDTO.fromJson(Map<String, dynamic> json) => _$GetAllCourseDTOFromJson(json);
+  Map<String, dynamic> toJson() => _$GetAllCoursesDTOToJson(this);
 
-  Map<String, dynamic> toJson() => _$GetAllCourseDTOToJson(this);
-
+  factory GetAllCoursesDTO.fromJson(Map<String, dynamic> json) =>
+      _$GetAllCoursesDTOFromJson(json);
 }

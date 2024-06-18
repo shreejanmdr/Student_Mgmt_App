@@ -5,20 +5,17 @@ import 'package:student_management_starter/features/batch/data/data_source/local
 import 'package:student_management_starter/features/batch/domain/entity/batch_entity.dart';
 import 'package:student_management_starter/features/batch/domain/repository/I_batch_repository.dart';
 
-final batchLocalRepoProvider = Provider<IBatchRepository>(
+final batchLocalRepository = Provider<IBatchRepository>(
   (ref) {
-    return BatchLocalRepositoryImpl(
+    return BatchLocalRepository(
         batchLocalDataSource: ref.read(batchLocalDataSourceProvider));
   },
 );
 
-class BatchLocalRepositoryImpl implements IBatchRepository {
+class BatchLocalRepository implements IBatchRepository {
   final BatchLocalDataSource batchLocalDataSource;
 
-  BatchLocalRepositoryImpl({
-    required this.batchLocalDataSource,
-  });
-
+  BatchLocalRepository({required this.batchLocalDataSource});
   @override
   Future<Either<Failure, bool>> addBatch(BatchEntity batch) {
     return batchLocalDataSource.addBatch(batch);

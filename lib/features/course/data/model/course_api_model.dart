@@ -23,16 +23,12 @@ class CourseApiModel extends Equatable {
   // From Json(),
   factory CourseApiModel.fromJson(Map<String, dynamic> json) {
     return CourseApiModel(
-      courseId: json['_id'],
-      courseName: json['courseName'],
-    );
+        courseId: json['_id'], courseName: json['courseName']);
   }
 
   // To Json(),
   Map<String, dynamic> toJson() {
-    return {
-      'courseName': courseName,
-    };
+    return {'courseName': courseName};
   }
 
   // Convert hive model to entity
@@ -54,6 +50,8 @@ class CourseApiModel extends Equatable {
   List<CourseApiModel> fromEntityList(List<CourseEntity> entities) {
     return entities.map((entity) => fromEntity(entity)).toList();
   }
+
+
 
   @override
   List<Object?> get props => [

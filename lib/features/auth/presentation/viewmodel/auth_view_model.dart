@@ -1,10 +1,12 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:student_management_starter/core/common/my_snackbar.dart';
 import 'package:student_management_starter/features/auth/domain/entity/auth_entity.dart';
 import 'package:student_management_starter/features/auth/domain/usecases/auth_usecase.dart';
 import 'package:student_management_starter/features/auth/presentation/navigator/login_navigator.dart';
 import 'package:student_management_starter/features/auth/presentation/state/auth_state.dart';
+import 'package:student_management_starter/features/batch/presentation/widgets/show_my_snackbar.dart';
 
 final authViewModelProvider =
     StateNotifierProvider<AuthViewModel, AuthState>((ref) {
@@ -17,10 +19,6 @@ class AuthViewModel extends StateNotifier<AuthState> {
 
   final AuthUseCase authUseCase;
   final LoginViewNavigator navigator;
-
-  void obsurePassword() {
-    state = state.copyWith(obscurePassword: !state.obscurePassword);
-  }
 
   void addStudent({required AuthEntity auth}) async {
     state = state.copyWith(isLoading: true);
@@ -44,6 +42,18 @@ class AuthViewModel extends StateNotifier<AuthState> {
       state = state.copyWith(isLoading: false, error: null);
       showMySnackBar(message: 'Login Successful');
       navigator.openHomeView();
+    });
+  }
+
+  Future<void> uploadImage(File? file) async {
+    state = state.copyWith(isLoading: true);
+    var data = await authUseCase.uploadProfilePicture(file!);
+    data.fold((l) {
+      state = state.copyWith(isLoading: false, error: l.error);
+      showMySnackBar(message: l.error, color: Colors.red);
+    }, (r) {
+      state = state.copyWith(imageName: r, isLoading: false, error: null);
+      showMySnackBar(message: 'Image Uploaded');
     });
   }
 

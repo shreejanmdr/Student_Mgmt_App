@@ -13,8 +13,8 @@ class LoginView extends ConsumerStatefulWidget {
 
 class _LoginViewState extends ConsumerState<LoginView> {
   final _formKey = GlobalKey<FormState>();
-  final _usernameController = TextEditingController(text: 'Shreejan');
-  final _passwordController = TextEditingController(text: 's123');
+  final _usernameController = TextEditingController(text: 'shreejan2');
+  final _passwordController = TextEditingController(text: 's@123');
 
   // final _usernameController = TextEditingController();
   // final _passwordController = TextEditingController();
@@ -59,20 +59,11 @@ class _LoginViewState extends ConsumerState<LoginView> {
                     TextFormField(
                       key: const ValueKey('password'),
                       controller: _passwordController,
-                      obscureText: authState.obscurePassword,
                       decoration: InputDecoration(
                         labelText: 'Password',
                         suffixIcon: IconButton(
-                          icon: Icon(
-                            authState.obscurePassword
-                                ? Icons.visibility
-                                : Icons.visibility_off,
-                          ),
-                          onPressed: () {
-                            ref
-                                .read(authViewModelProvider.notifier)
-                                .obsurePassword();
-                          },
+                          icon: const Icon(Icons.visibility),
+                          onPressed: () {},
                         ),
                       ),
                       validator: ((value) {
@@ -84,12 +75,14 @@ class _LoginViewState extends ConsumerState<LoginView> {
                     ),
                     _gap,
                     ElevatedButton(
-                      onPressed: () async {
-                        if (_formKey.currentState!.validate()) {
-                          ref.read(authViewModelProvider.notifier).login(
-                                username: _usernameController.text,
-                                password: _passwordController.text,
-                              );
+                      onPressed: () {
+                        {
+                          if (_formKey.currentState!.validate()) {
+                            ref.read(authViewModelProvider.notifier).login(
+                                  username: _usernameController.text,
+                                  password: _passwordController.text,
+                                );
+                          }
                         }
                       },
                       child: const SizedBox(
